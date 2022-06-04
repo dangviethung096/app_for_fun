@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() {
   runApp(
@@ -23,6 +24,16 @@ class _MyAppState extends State<MyApp> {
   bool imageVisible = false;
   int step = 0;
   double opacity = 1.0;
+  AudioPlayer player = AudioPlayer();
+
+  @override
+  void initState() {
+    super.initState();
+    player.setSource(UrlSource(
+        'https://data36.chiasenhac.com/downloads/1966/6/1965650-dd6e48cf/128/Ai%20Cho%20Ai%20-%20FloD%20ft_%20M_%20Giang%20Nguyen_.mp3'));
+    _play();
+  }
+
   List<String> messages = [
     'Chà một năm trôi qua thật nhanh nhỉ!',
     'Bạn đã có một năm thật đáng nhớ chứ?',
@@ -76,5 +87,10 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
+  }
+
+  Future<void> _play() async {
+    player.seek(const Duration());
+    await player.resume();
   }
 }
